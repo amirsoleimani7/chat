@@ -34,6 +34,7 @@ ASGI_APPLICATION = 'django_chat.asgi.application' #
 INSTALLED_APPS = [
     'daphne',
     'channels',  
+    'chat' , 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,6 +52,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 ROOT_URLCONF = 'django_chat.urls'
 
@@ -123,3 +131,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+LOGIN_REDIRECT_URL = 'chat-page'
+LOGOUT_REDIRECT_URL = 'login-user'
+
+
+
