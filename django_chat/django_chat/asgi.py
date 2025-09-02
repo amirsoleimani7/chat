@@ -9,8 +9,15 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
 
 import os
 
+
+from channels.routing import ProtocolTypeRouter
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_chat.settings')
+django_asgi_app = get_asgi_application()
 
-application = get_asgi_application()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE' , 'django_chat.settings')
+application = ProtocolTypeRouter({
+    "http" : django_asgi_app, 
+})
+
+ASGI_APPLICATION = 'django_chat.asgi.application'
